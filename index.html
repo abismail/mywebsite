@@ -1,0 +1,166 @@
+<html>
+	<head>
+		<style type="text/css">
+		.square-type-1, .square-type-2, .square-type-3 {
+			background-image: url('images/squares.png');
+			background-repeat: no-repeat;
+		}
+
+		.cursor {
+			height: 35px;
+			width: 35px;
+			float:left;
+			border: 1px;
+			border-style: solid;
+			border-color: green;
+			margin-bottom: 0.25px;
+			margin-left: 0.25px;
+			margin-right: 0.25px;
+			margin-top:  333px;
+		}
+
+		.square-type-1 {
+			height: 35px;
+			width: 35px;
+			background-position: -50px -85px;
+			float:left;
+			border: 0.5px;
+			border-style: solid;
+			border-color: black;
+			margin-bottom: 0.25px;
+			margin-left: 0.25px;
+			margin-right: 0.25px;
+			margin-top:  333px;
+		}
+
+		.square-type-2 {
+			height: 35px;
+			width: 35px;
+			background-position: -95px -130px;
+			float:left;
+			border: 0.5px;
+			border-style: solid;
+			border-color: black;
+			margin-bottom: 0.25px;
+			margin-left: 0.25px;
+			margin-right: 0.25px;
+			margin-top:  333px;
+		}
+
+		.square-type-3 {
+			height: 35px;
+			width: 35px;
+			background-position: -140px -175px;
+			float:left;
+			border: 0.5px;
+			border-style: solid;
+			border-color: black;
+			margin-bottom: 0.25px;
+			margin-left: 0.25px;
+			margin-right: 0.25px;
+			margin-top:  333px;
+		}
+
+		.stage {
+			background-image: url('images/stages/stage-1.jpg');
+			background-repeat: no-repeat;
+			height: 333px;
+			width: 236px;
+			margin-top: 10px;
+			margin-left: 10px;
+
+		}
+		.dimmed {
+			position: relative;
+			op
+		}
+
+		.dimmed:after {
+			z-index: 10;
+			display: block;
+			position: absolute;
+			height: 333px;
+			width: 236px;
+			top: 0;
+			left: 0;
+			right: 0;
+			background: rgba(0, 0, 0, 0.5);
+		}
+		</style>
+		<script type="text/javascript" src="./js/easeljs-0.8.2.min.js" ></script>
+		<script src="https://code.createjs.com/tweenjs-0.6.2.min.js"></script>
+		<script type="text/javascript" src="./js/jquery.min.js" ></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				var game_speed = 1200;
+				var animate_distance = 10;
+				var top_row_position = 0;
+
+				$("button").click(function(e){
+					e.preventDefault();
+					animateGame();
+				});
+
+				function animateGame(){
+					setTimeout(function() {
+						$(".square-type-3").offset({
+							top:$(".square-type-3").offset().top-animate_distance
+							, left:$(".square-type-3").offset().left
+						});
+						$(".square-type-2").offset({
+							top:$(".square-type-2").offset().top-animate_distance
+							, left:$(".square-type-2").offset().left
+						});
+						$(".square-type-1").offset({
+							top:$(".square-type-1").offset().top-animate_distance
+							, left:$(".square-type-1").offset().left
+						});
+						console.log("loop: "+animate_distance);
+						top_row_position=$(".square-type-3").offset().top;
+						if(top_row_position > 10){
+							animateGame();
+						}
+					}, game_speed);
+				}
+			});
+
+			/*function init(){
+				//first control
+				var game_canvas = new createjs.Stage("mainCanvas");
+				var squareType1 = new createjs.Shape();
+				var squareType2 = new createjs.Shape();
+				var squareType3 = new createjs.Shape();
+				squareType1.graphics.beginFill("Green").drawSquare(50, 50);
+				game_canvas.addChild(squareType1);
+				game_canvas.update();
+			}*/
+		</script>
+	</head>
+	<!-- <body onload="init();"> -->
+	<body>
+		<!-- everything else-->
+
+		<!-- <div id="hud" width="276" height="363">
+			<canvas id="mainCanvas" class="stage1 dimmed" width="236" height="333">
+			
+			</canvas>	
+		</div> -->
+		<div id="hud" width="276" height="363">
+			<div id="mainCanvas" class="stage dimmed">
+				<div class="selector">
+					<div class="cursor"></div>
+					<div class="cursor"></div>
+				</div>
+			</div>	
+		</div>
+
+		<button>Play!</button>
+		<div class="hidden" style="display:none;">
+			<div class="square-type-1"></div>
+			<div class="square-type-2"></div>
+			<div class="square-type-3"></div>
+			<div class="square-type-4"></div>
+			<div class="square-type-5"></div>
+		</div>
+	</body>
+</html>
